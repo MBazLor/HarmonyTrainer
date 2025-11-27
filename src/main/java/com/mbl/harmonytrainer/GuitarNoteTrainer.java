@@ -16,7 +16,9 @@ public class GuitarNoteTrainer extends Application {
         Scene scene = new Scene(root, 200, 300);
         stage.setTitle("Guitar Note Trainer");
         stage.setScene(scene);
+        new GuitarNeckGraph().addToStage(stage);
         stage.show();
+
     }
 
     public static void main(String[] args) {

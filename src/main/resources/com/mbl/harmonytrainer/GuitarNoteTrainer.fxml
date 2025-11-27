@@ -19,4 +19,5 @@
     <TextField fx:id="intervalField" maxWidth="200" promptText="introduce tiempo (s)" />
     <Button onAction="#startTraining" prefHeight="34.0" prefWidth="80.0" text="Start" />
     <Button onAction="#stopTraining" prefHeight="37.0" prefWidth="77.0" text="Stop" />
+    <Button onAction="#showNextNote" prefHeight="37.0" prefWidth="100.0" text="Next Note" />
 </VBox>
