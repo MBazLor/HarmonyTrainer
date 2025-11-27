@@ -49,6 +49,15 @@ public class GuitarNoteTrainerController {
         noteLabel.setText(randomNote);
     }
 
+    @FXML
+    public void showNextNote() {
+        if (timeline != null) {
+            timeline.stop();
+            timeline.play();
+        }
+        showRandomNote();
+    }
+
 }
 
 
