@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.mbl.harmonytrainer.GuitarNoteTrainerController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <Label fx:id="noteLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="114.0" prefWidth="119.0" style="-fx-background-color: black; -fx-background-radius: 20;" text="C#" textAlignment="CENTER" textFill="#00ff09">
+      <font>
+         <Font name="System Bold" size="79.0" />
+      </font></Label>
+    <TextField fx:id="intervalField" maxWidth="200" promptText="introduce tiempo (s)" />
+    <Button onAction="#startTraining" prefHeight="34.0" prefWidth="80.0" text="Start" />
+    <Button onAction="#stopTraining" prefHeight="37.0" prefWidth="77.0" text="Stop" />
+</VBox>
