@@ -13,12 +13,10 @@ public class GuitarNoteTrainer extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuitarNoteTrainer.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root, 200, 300);
-        stage.setTitle("Guitar Note Trainer");
+        Scene scene = new Scene(root, 600, 600);
+        stage.setTitle("    Guitar Note Trainer");
         stage.setScene(scene);
-        new GuitarNeckGraph().addToStage(stage);
         stage.show();
-
     }
 
     public static void main(String[] args) {

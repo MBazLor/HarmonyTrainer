@@ -4,7 +4,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.util.Random;
@@ -15,17 +16,17 @@ public class GuitarNoteTrainerController {
     };
     private final Random random = new Random();
     private Timeline timeline;
-
     @FXML
     private Label noteLabel;
-
     @FXML
-    private TextField intervalField;
+    private Slider intervalSlider;
+    @FXML
+    AnchorPane neckPane;
 
     @FXML
     private void startTraining() {
         try {
-            float interval = Float.parseFloat(intervalField.getText());
+            double interval = intervalSlider.getValue();
             if (timeline != null) {
                 timeline.stop(); // Stop the existing timeline if it exists
             }
@@ -56,6 +57,11 @@ public class GuitarNoteTrainerController {
             timeline.play();
         }
         showRandomNote();
+    }
+
+    @FXML
+    public void initialize() {
+        neckPane.getChildren().add(new GuitarNeckGraph().getNode());
     }
 
 }
