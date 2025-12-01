@@ -14,7 +14,7 @@ public class GuitarNoteTrainer extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuitarNoteTrainer.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 600);
-        stage.setTitle("    Guitar Note Trainer");
+        stage.setTitle("Guitar Note Trainer");
         stage.setScene(scene);
         stage.show();
     }
