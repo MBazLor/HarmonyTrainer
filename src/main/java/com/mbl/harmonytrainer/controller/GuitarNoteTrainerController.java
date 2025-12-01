@@ -5,6 +5,7 @@ import com.mbl.harmonytrainer.model.Notes;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
@@ -27,6 +28,7 @@ public class GuitarNoteTrainerController {
     private Slider intervalSlider;
     @FXML
     AnchorPane neckPane;
+    GuitarNeckGraph guitarNeckGraph;
 
 
     @FXML
@@ -52,7 +54,11 @@ public class GuitarNoteTrainerController {
     }
 
     private void showRandomNote() {
-        noteLabel.setText(notes.getRandomNote());
+        guitarNeckGraph.clearNoteMarkers();
+        String note = notes.getRandomNote();
+        noteLabel.setText(note);
+        guitarNeckGraph.drawNoteMarker(note);
+
     }
 
     @FXML
@@ -66,7 +72,8 @@ public class GuitarNoteTrainerController {
 
     @FXML
     public void initialize() {
-        neckPane.getChildren().add(new GuitarNeckGraph().getNode());
+        guitarNeckGraph = new GuitarNeckGraph();
+        neckPane.getChildren().add(guitarNeckGraph.getNode());
     }
 
 }

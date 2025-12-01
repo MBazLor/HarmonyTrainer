@@ -1,10 +1,14 @@
 package com.mbl.harmonytrainer.model;
 
+import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to draw a guitar neck graphically using JavaFX
@@ -12,9 +16,13 @@ import javafx.scene.shape.Rectangle;
  */
 public class GuitarNeckGraph {
 
-    int fretQty;
-    int strings;
+    //Start coordinates
+    private int x;
+    private int y;
+    private int fretQty;
+    private int strings;
     private final Pane node;
+    List stringsInst = new ArrayList<>();
 
     public GuitarNeckGraph(){
         this(12);
@@ -23,6 +31,8 @@ public class GuitarNeckGraph {
         this.fretQty = frets;
         this.node = new Pane();
         this.strings = 6;
+        this.x = 50;
+        this.y = 20;
         //draw horizontal guitar neck
         drawNeck(500, 100);
     }
@@ -34,10 +44,7 @@ public class GuitarNeckGraph {
      */
     public void drawNeck(int neckWidth, int neckHeight) {
 
-         double spacing = (double) neckWidth / fretQty; //Computed fret spacing
-         // Start coordinates for drawing inside the Pane
-         int x = 50;
-         int y = 20;
+        double spacing = (double) neckWidth / fretQty; //Computed fret spacing
         drawFretboard(neckWidth, neckHeight, x, y);
         drawFrets(neckHeight, spacing, x, y);
         drawMarks(neckHeight, spacing, x, y);
@@ -138,6 +145,7 @@ public class GuitarNeckGraph {
      * @param y
      */
     public void drawStrings(int neckWidth, int neckHeight, int x, int y) {
+        //TODO convert strings to objects and store his position and properties
         for (int i = 0; i < strings; i++) {
             double stringY = neckHeight + y - (y + (i + 1) * (neckHeight / (strings + 1)) - (y+1)/2);
             Line stringLine = new Line(
@@ -160,6 +168,39 @@ public class GuitarNeckGraph {
     }
 
     /**
+     * Draw a note marker on the guitar neck at the specified fret and string
+     * @param note The musical note to mark
+     */
+    public void drawNoteMarker(String note){
+        Group markersGroup = new Group(); //Markers added to a group to facilitate removal later
+        int interval = 0, xPos = 0, yPos = 0;
+        //TODO hardcoded neck with to property
+        double spacing = (double) 500 / fretQty;
+
+        for(int i=0; i<strings ; i++){
+            switch (i) {
+                case 0 -> interval = Notes.calculateInterval("E", note);
+                case 1 -> interval = Notes.calculateInterval("A", note);
+                case 2 -> interval = Notes.calculateInterval("D", note);
+                case 3 -> interval = Notes.calculateInterval("G", note);
+                case 4 -> interval = Notes.calculateInterval("B", note);
+                case 5 -> interval = Notes.calculateInterval("E", note);
+                default -> interval = -1;
+            }
+            //TODO improve position calculation
+            xPos = x + (interval * (int) spacing) - ((int)spacing / 2);
+            yPos = y + 100 - (y + (i + 1) * (100 / (strings + 1)) - (y+1)/2);
+            Circle noteMarker = new Circle(xPos, yPos, 8);
+            noteMarker.setFill(Color.RED);
+            markersGroup.getChildren().add(noteMarker);
+
+        }
+        node.getChildren().add(markersGroup);
+        markersGroup.toFront();
+
+    }
+
+    /**
      * Get the Pane node with the guitar neck drawn
      * @return Pane node
      */
@@ -168,4 +209,7 @@ public class GuitarNeckGraph {
     }
 
 
+    public void clearNoteMarkers() {
+        node.getChildren().removeIf(child -> child instanceof Group);
+    }
 }
